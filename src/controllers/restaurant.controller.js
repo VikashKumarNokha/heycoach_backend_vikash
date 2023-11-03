@@ -11,5 +11,35 @@ const addRestaurant = async (req, res)=>{
     return res.status(200).json(newData.toJSON())
 }
 
+const getRestaurant = async (req, res)=>{
+           const data = await Restaurant.findAll({});
 
-module.exports = {addRestaurant}
+         return  res.status(200).json({data});
+}
+
+const getRestaurantById = async (req, res)=>{
+      const data =  await Restaurant.findOne({where : {id : req.params.id}});
+      return  res.status(200).json({data});
+}
+
+const postRestaurant = async (req, res)=>{
+    const newdata = req.body;
+    const data =  await Restaurant.create(newdata);
+    return  res.status(200).json({data});
+}
+
+const deleteRestaurantById = async (req, res)=>{
+    const data =  await Restaurant.destroy({where : {id : req.params.id}});
+    return  res.status(200).json({data});
+}
+
+const updateRestaurantById = async (req, res)=>{
+      let updatedData = req.body;
+    const data =  await Restaurant.update( updatedData, {where : {id : req.params.id}});
+    return  res.status(200).json({data});
+}
+
+
+
+
+module.exports = {addRestaurant, getRestaurant, getRestaurantById, postRestaurant, deleteRestaurantById, updateRestaurantById}

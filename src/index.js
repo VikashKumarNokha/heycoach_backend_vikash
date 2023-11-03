@@ -3,7 +3,9 @@ const bodyParsel = require("body-parser");
 
  const Restaurants = require("./models/restaurant")
 
- const {addRestaurant} = require("./controllers/restaurant.controller")
+ const {addRestaurant, getRestaurant,
+       getRestaurantById, postRestaurant,
+       deleteRestaurantById, updateRestaurantById } = require("./controllers/restaurant.controller")
 
 const app = express();
 
@@ -17,8 +19,13 @@ app.get("/", (req, res)=>{
 
 app.get("/add", addRestaurant );
 
+app.get("/get", getRestaurant);
+app.get("/get/:id", getRestaurantById )
+app.post("/post", postRestaurant);
+app.delete("/delete/:id", deleteRestaurantById );
+app.patch("/update/:id", updateRestaurantById )
 
-   Restaurants.sync({ force: true });
+Restaurants.sync({ force: false });
 
 app.listen(5000, ()=>{
       console.log("server running on port 5000")
