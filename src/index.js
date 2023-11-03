@@ -1,5 +1,6 @@
 const express = require("express")
 const bodyParsel = require("body-parser");
+const cors = require("cors")
 
  const Restaurants = require("./models/restaurant")
 
@@ -8,6 +9,8 @@ const bodyParsel = require("body-parser");
        deleteRestaurantById, updateRestaurantById } = require("./controllers/restaurant.controller")
 
 const app = express();
+
+app.use(cors())
 
 app.use(bodyParsel.json());
 
